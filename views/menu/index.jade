@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    title mi priemra pagina
+    meta(charset="utf-8")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet")
+    link(rel="stylesheet" href="css/main.css")
+    link(rel="stylesheet" href="css/animate.css")
+    link(href="https://fonts.googleapis.com/css?family=Lato|Pacifico" rel="stylesheet")
+
+  body
+    section
+      div(class="text-center mediano")
+        h1(class="pacifico grande azul ") Productos
+        p Toda la ropa es de buena calidad
+        div(class="col-md-6 col-sm-6 inline-block")
+          each product in products
+            article(class="animated bounceIn")
+              h2 #{product.title} #{product.description} #{product.id}
+
+   

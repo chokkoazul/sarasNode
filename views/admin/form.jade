@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+	head
+		title mi priemra pagina
+		meta(charset="utf-8")
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet")
+		link(rel="stylesheet" href="css/main.css")
+		link(rel="stylesheet" href="css/animate.css")
+		link(href="https://fonts.googleapis.com/css?family=Lato|Pacifico" rel="stylesheet")
+
+	body
+	section
+	div(class="col-md-5 center-block no-float top-space text-left")
+		h1 Login administradores
+		form(method="POST" action="/admin" style="margin-top:1.5em;")
+			div(class="form-group")
+			label Contraseña
+			input(id="password" type="password" name="password" placeholder="Contraseña de administrador" class="form-control")
+			div(class="form-group text-right")
+			input(type="submit" class="btn btn-info" value="Guardar")

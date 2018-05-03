@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+  head
+    title mi priemra pagina
+    meta(charset="utf-8")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet")
+    link(rel="stylesheet" href="css/main.css")
+    link(rel="stylesheet" href="css/animate.css")
+    link(href="https://fonts.googleapis.com/css?family=Lato|Pacifico" rel="stylesheet")
+
+  body
+    h1 Panel de productos
+      table(class="table")
+        caption Productos Actuales
+        thead
+          tr
+            th Nombre
+            th Descripción
+            th Acciones
+        tbody
+          each product in products
+            tr
+              td #{product.title}
+              td #{product.description}
+              td
+                a(href="/admin/edit/#{product._id}") Editar
+                a(href="/admin/delete/#{product._id}") Eliminar
