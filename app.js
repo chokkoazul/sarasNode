@@ -6,14 +6,15 @@ var app = express();
 
 
 
-var env = process.env.ENVIRONMENT;
+var ENVIRONMENT = process.env.ENVIRONMENT;
+var MONGO_URI = process.env.MONGO_URI;
 
-//if (env === "PROD") {
+if (ENVIRONMENT === "production") {
 	console.log("es production");
-	mongoose.connect("mongodb://sarasuser:dantedante@ds113870.mlab.com:13870/sarasdb");
-//} else {
-//	mongoose.connect("mongodb://localhost/saradb");
-//}
+	mongoose.connect(MONGO_URI);
+} else {
+	mongoose.connect("mongodb://localhost/saradb");
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
