@@ -8,12 +8,12 @@ var app = express();
 
 var env = process.env.ENVIRONMENT;
 
-if (env === "PROD") {
+//if (env === "PROD") {
 	console.log("es production");
 	mongoose.connect("mongodb://sarasuser:dantedante@ds113870.mlab.com:13870/sarasdb");
-} else {
-	mongoose.connect("mongodb://localhost/saradb");
-}
+//} else {
+//	mongoose.connect("mongodb://localhost/saradb");
+//}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
