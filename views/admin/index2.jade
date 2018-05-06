@@ -3,25 +3,27 @@ html(lang="en")
   head
     title mi priemra pagina
     meta(charset="utf-8")
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css")
+    link(rel="stylesheet" href="css/main.css")
+    link(rel="stylesheet" href="css/animate.css")
+    link(href="https://fonts.googleapis.com/css?family=Lato|Pacifico" rel="stylesheet")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
     script(src="https://code.jquery.com/jquery-1.11.1.min.js")
-    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
-    script(src="http://getbootstrap.com/dist/js/bootstrap.min.js")
-
+    
   body
-      div(class="container")
+      div(class="container text-center")
         div(class="row")
            div(class="col-md-12")
-           h4 Bootstrap Snipp for Datatable
+           h4 Listado de productos
            div(class="table-responsive")
              table(id="mytable" class="table table-bordred table-striped")
                thead
-                 th Nombre
-                 th Descripcción
-                 th Estado
-                 th Edit
-                 th Delete
+                 th(class="text-center") Nombre
+                 th(class="text-center") Descripcción
+                 th(class="text-center") Estado
+                 th(class="text-center") Edit
+                 th(class="text-center") Delete
                tbody
                  each product in products
                    tr
@@ -30,12 +32,51 @@ html(lang="en")
                    td
                     span(class="label label-success") #{product.status}
                    td
-                    a(href="/admin/edit/#{product._id}")
-                     p(data-placement="top" data-toggle="tooltip" title="Edit")
-                      button(class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit")
-                       span(class="glyphicon glyphicon-pencil")
+                      p(data-placement="top" data-toggle="tooltip" title="Edit")
+                       button(class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit")
+                        span(class="glyphicon glyphicon-pencil")
                    td
-                    a(href="/admin/delete/#{product._id}")
-                     p(data-placement="top" data-toggle="tooltip" title="Delete")
-                      button(class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete")
-                       span(class="glyphicon glyphicon-trash")
+                      p(data-placement="top" data-toggle="tooltip" title="Delete")
+                       button(class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete")
+                        span(class="glyphicon glyphicon-trash")
+                 
+      div(class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
+        div(class="modal-dialog")
+         div(class="modal-content")
+          div(class="modal-header")
+           button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
+            span(class="glyphicon glyphicon-remove" aria-hidden="true")
+           h4(class="modal-title custom_align" id="Heading") Edit Your Detail
+          div(class="modal-body")
+           div(class="form-group")
+            input(class="form-control" type="text" placeholder="Mohsin")
+           div(class="form-group")
+            input(class="form-control" type="text" placeholder="Irshad")
+           div(class="form-group")
+            textarea(rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan")
+          div(class="modal-footer")
+           button(type="button" class="btn btn-primary" style="width: 100%;") Actualizar
+
+      div(class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
+        div(class="modal-dialog")
+          div(class="modal-content")
+            div(class="modal-header")
+              button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
+               span(class="glyphicon glyphicon-remove" aria-hidden="true")
+              h4(class="modal-title custom_align" id="Heading") Eliminar un producto
+            div(class="modal-body")
+              div(class="alert alert-danger")
+               h4 ¿Estas seguro que quieres eliminar este producto?
+            div(class="modal-footer quitar-float")
+              a(href="/admin/eliminar")
+               button(type="button" class="btn btn-danger" style="width: 100%;") Si
+              button(type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100%;") No
+               
+                
+
+
+
+
+
+
+
