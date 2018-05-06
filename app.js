@@ -23,7 +23,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 var productShema = {
 	title:String,
 	description:String,
-	pricing:Number,
+	purchasePrice:Number,
+    salePrice:Number,
 	status:String
 };
 
@@ -35,7 +36,8 @@ app.get("/", function(req,res){
 	var data = {
 		title: "pantalon",
 		description: "muy lindo",
-		pricing: 10000,
+		purchasePrice: 10000,
+	    salePrice: 10123,
 		status: "Vendido"
 	}
 
@@ -68,6 +70,8 @@ app.get("/admin2", function(req,res){
 
 
 app.post("/admin/edit", function(req,res){
+    console.log("editar");
+    console.log(req)
     var idProd = req.body.id_prod;
     var data = 
 	{ title: req.body.title,

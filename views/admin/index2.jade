@@ -4,6 +4,7 @@ html(lang="en")
     title mi priemra pagina
     meta(charset="utf-8" name="viewport" content="width=device-width, initial-scale=1")
     script(src="https://code.jquery.com/jquery-1.11.1.min.js")
+    script(src="js/test.js")
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css")
     link(rel="stylesheet" href="css/main.css")
     link(rel="stylesheet" href="css/animate.css")
@@ -42,19 +43,23 @@ html(lang="en")
                thead
                  th(class="text-center") Nombre
                  th(class="text-center") Descripcción
+                 th(class="text-center") Precio Compra
+                 th(class="text-center") Precio Venta
                  th(class="text-center") Estado
-                 th(class="text-center") Edit
-                 th(class="text-center") Delete
+                 th(class="text-center") 
+                 th(class="text-center") 
                tbody
                  each product in products
                    tr
                    td #{product.title}
                    td #{product.description}
+                   td #{product.purchasePrice}
+                   td #{product.salePrice}
                    td
                     span(class="label label-success") #{product.status}
                    td
                       p(data-placement="top" data-toggle="tooltip" title="Edit")
-                       button(class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit")
+                       button(class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-nombre="#{product.title}" data-descripccion="#{product.description}" data-preciocompra="#{product.purchasePrice}" data-precioventa="#{product.salePrice}")
                         span(class="glyphicon glyphicon-pencil")
                    td
                       p(data-placement="top" data-toggle="tooltip" title="Delete")
@@ -64,19 +69,24 @@ html(lang="en")
       div(class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
         div(class="modal-dialog")
          div(class="modal-content")
-          div(class="modal-header")
-           button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
-            span(class="glyphicon glyphicon-remove" aria-hidden="true")
-           h4(class="modal-title custom_align" id="Heading") Edit Your Detail
-          div(class="modal-body")
-           div(class="form-group")
-            input(class="form-control" type="text" placeholder="Mohsin")
-           div(class="form-group")
-            input(class="form-control" type="text" placeholder="Irshad")
-           div(class="form-group")
-            textarea(rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan")
-          div(class="modal-footer")
-           button(type="button" class="btn btn-primary" style="width: 100%;") Actualizar
+          form(method="POST" action="/admin/edit" style="margin-top:1.5em;")
+           div(class="modal-header")
+            button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
+             span(class="glyphicon glyphicon-remove" aria-hidden="true")
+            h4(class="modal-title custom_align" id="Heading") Editar Producto
+           div(class="modal-body")
+            div(class="form-group")
+             input(class="form-control" id="nombre" type="text")
+            div(class="form-group")
+             input(class="form-control" id="descripccion" type="text")
+            div(class="form-group")
+             input(class="form-control" id="precioCompra" type="text" disabled)
+            div(class="form-group")
+             input(class="form-control" id="precioVenta" type="text")
+           div(class="modal-footer")
+            input(type="submit" class="btn btn-info" value="Guardar")
+            a(id="linkeditar")
+             button(type="button" class="btn btn-primary" style="width: 100%;") Actualizar
 
       div(class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
         div(class="modal-dialog")
