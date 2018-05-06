@@ -11,6 +11,28 @@ html(lang="en")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
     
   body
+      nav(class="navbar navbar-default")
+        div(class="container-fluid")
+          div(class="navbar-header")
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+            a(class="navbar-brand" href="#") Saras
+          div(class="collapse navbar-collapse" id="myNavbar")          
+            ul(class="nav navbar-nav")
+              li(class="active")
+                a(href="#") Home
+              li(class="dropdown")
+                a(class="dropdown-toggle" data-toggle="dropdown" href="#") Ingresar producto
+                  span(class="caret")
+                ul(class="dropdown-menu")
+                  li
+                    a(href="#") page 1
+                    a(href="#") page 1
+                    a(href="#") page 1
+              li
+                a(href="#") Ingresar producto
       div(class="container text-center")
         div(class="row")
            div(class="col-md-12")
