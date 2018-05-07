@@ -3,10 +3,8 @@ $(document).on("click", ".btn", function () {
      var descripccion = $(this).data('descripccion');
      var precioCompra = $(this).data('preciocompra');
      var precioVenta = $(this).data('precioventa');
-     $(".modal-body #nombre").val(nombre);
-     $(".modal-body #descripccion").val(descripccion);
-     $(".modal-body #precioCompra").val(precioCompra);
-     $(".modal-body #precioVenta").val(precioVenta);
-     $(".modal-footer #linkeditar").attr("href", "/admin/edit");
-       
+     $(".modal-content #nombre").attr("value",nombre);
+     $(".modal-content #descripccion").attr("value",descripccion);
+     $(".modal-content #precioCompra").attr("value",precioCompra);
+     $(".modal-content #precioVenta").attr("value",precioVenta);
 });

@@ -71,7 +71,7 @@ app.get("/admin2", function(req,res){
 
 app.post("/admin/edit", function(req,res){
     console.log("editar");
-    console.log(req)
+    console.log(req.body)
     var idProd = req.body.id_prod;
     var data = 
 	{ title: req.body.title,

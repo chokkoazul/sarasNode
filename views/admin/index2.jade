@@ -74,20 +74,22 @@ html(lang="en")
             button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
              span(class="glyphicon glyphicon-remove" aria-hidden="true")
             h4(class="modal-title custom_align" id="Heading") Editar Producto
-           div(class="modal-body")
+            br
             div(class="form-group")
-             input(class="form-control" id="nombre" type="text")
+             label Nombre
+             input(id="nombre" name="nombre" type="text" class="form-control")
             div(class="form-group")
-             input(class="form-control" id="descripccion" type="text")
+             label Descripcción
+             input(class="form-control" name="descripccion" id="descripccion" type="text")
             div(class="form-group")
-             input(class="form-control" id="precioCompra" type="text" disabled)
+             label Precio de Compra
+             input(class="form-control" name="precioCompra" id="precioCompra" type="text" disabled)
             div(class="form-group")
-             input(class="form-control" id="precioVenta" type="text")
-           div(class="modal-footer")
-            input(type="submit" class="btn btn-info" value="Guardar")
-            a(id="linkeditar")
-             button(type="button" class="btn btn-primary" style="width: 100%;") Actualizar
-
+             label Precio de Venta
+             input(class="form-control" name="precioVenta" id="precioVenta" type="text")
+            div(class="form-group")
+             input(type="submit" class="btn btn-primary" value="Guardar" style="width: 100%;")
+ 
       div(class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
         div(class="modal-dialog")
           div(class="modal-content")
