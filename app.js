@@ -74,9 +74,10 @@ app.post("/admin/edit", function(req,res){
     console.log(req.body)
     var idProd = req.body.id_prod;
     var data = 
-	{ title: req.body.title,
-  	  description: req.body.description,
-  	  status:req.body.status
+	{ title: req.body.nombre,
+  	  description: req.body.descripccion,
+  	  salePrice: req.body.precioVenta,
+  	  status: "Vendido"
   	};
 
   	Product.update({"_id":idProd}, data, function(error, product){
@@ -94,6 +95,7 @@ var id_producto = req.params.id;
 });
 
 app.get("/admin/delete/:id", function(req,res){
+console.log("borrarr!!!");
 var id_producto = req.params.id;
 	Product.remove({"_id":id_producto}, function(error){
   		if(error){console.log(error);}
