@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    
     $("#btnEditar").click(function(){
     	var idprod = $(this).data('idprod');
      	var nombre = $(this).data('nombre');
@@ -14,9 +13,12 @@ $(document).ready(function() {
     }); 
 
 	$("#btnEliminar").click(function(){
-    	var idprod = $(this).data('idprod');
+        var idprod = $(this).data('idprod');
      	$(".modal-content #aEliminar").attr("href","/admin/delete/"+idprod);
     }); 
+
+
+
 
 
 });
