@@ -73,6 +73,7 @@ app.post("/admin/edit", function(req,res){
     console.log("editar");
     console.log(req.body)
     var idProd = req.body.id_prod;
+    console.log(idProd);
     var data = 
 	{ title: req.body.nombre,
   	  description: req.body.descripccion,
@@ -95,8 +96,9 @@ var id_producto = req.params.id;
 });
 
 app.get("/admin/delete/:id", function(req,res){
-console.log("borrarr!!!");
 var id_producto = req.params.id;
+	console.log(id_producto);
+    
 	Product.remove({"_id":id_producto}, function(error){
   		if(error){console.log(error);}
 		res.redirect("/admin2");
