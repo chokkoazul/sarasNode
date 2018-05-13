@@ -10,7 +10,6 @@ var ENVIRONMENT = process.env.ENVIRONMENT;
 var MONGO_URI = process.env.MONGO_URI;
 
 if (ENVIRONMENT === "production") {
-	console.log("es production");
 	mongoose.connect(MONGO_URI);
 } else {
 	mongoose.connect("mongodb://localhost/saradb");
@@ -18,7 +17,6 @@ if (ENVIRONMENT === "production") {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-//app.use(method_override("_method"));
 
 var productShema = {
 	title:String,
@@ -85,6 +83,27 @@ app.post("/admin/edit", function(req,res){
   		if(error){console.log(error);}
 		res.redirect("/admin2");
   	});
+});
+
+app.post("/admin/create", function(req,res){
+    console.log("create");
+//    console.log(req.body)
+  
+    var data = {
+		title: req.body.nombreins,
+		description: req.body.descripccionins,
+		purchasePrice: req.body.precioComprains,
+	    salePrice: req.body.precioVentains,
+		status: "En Stock"
+	}
+
+	var product = new Product(data);
+
+	product.save(function(err){
+		if(err){console.log(err);}
+		res.redirect("/admin2");
+	});
+
 });
 
 

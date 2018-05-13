@@ -65,7 +65,7 @@ html(lang="en")
            div(class="modal-header")
             button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
              span(class="glyphicon glyphicon-remove" aria-hidden="true")
-            h4(class="modal-title custom_align" id="Heading") Editar Producto
+            h4(class="modal-title custom_align" id="Heading") Modificar Producto
             br
             input(id="id_prod" type="hidden" name="id_prod")
             div(class="form-group")
@@ -81,7 +81,7 @@ html(lang="en")
              label Precio de Venta
              input(class="form-control" name="precioVenta" id="precioVenta" type="text")
             div(class="form-group")
-             input(type="submit" class="btn btn-primary" value="Guardar" style="width: 100%;")
+             input(type="submit" class="btn btn-primary" value="Modificar Producto" style="width: 100%;")
  
       div(class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
         div(class="modal-dialog")
@@ -110,18 +110,18 @@ html(lang="en")
             br
             div(class="form-group")
              label Nombre
-             input(id="nombreins" name="nombreins" type="text" class="form-control")
+             input(id="nombreins" name="nombreins" type="text" class="form-control" placeholder="nombre del producto")
             div(class="form-group")
              label Descripcción
-             input(class="form-control" name="descripccionins" id="descripccionins" type="text")
+             input(class="form-control" name="descripccionins" id="descripccionins" type="text" placeholder="descripcción del producto")
             div(class="form-group")
              label Precio de Compra
-             input(class="form-control" name="precioComprains" id="precioComprains" type="text")
+             input(class="form-control" name="precioComprains" id="precioComprains" type="text" placeholder="precio de compra del producto")
             div(class="form-group")
              label Precio de Venta
-             input(class="form-control" name="precioVentains" id="precioVentains" type="text")
+             input(class="form-control" name="precioVentains" id="precioVentains" type="text" placeholder="precio de venta del producto")
             div(class="form-group")
-             input(type="submit" class="btn btn-primary" value="Guardar" style="width: 100%;")
+             input(type="submit" class="btn btn-primary" value="Crear Producto" style="width: 100%;")
 
 
 
