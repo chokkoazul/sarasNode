@@ -31,7 +31,7 @@ var Product = mongoose.model("Product", productShema);
 app.set("view engine","jade");
 app.use(express.static("public"));
 app.get("/", function(req,res){
-	var data = {
+	/*var data = {
 		title: "pantalon",
 		description: "muy lindo",
 		purchasePrice: 10000,
@@ -44,7 +44,7 @@ app.get("/", function(req,res){
 	product.save(function(err){
 console.log("products"+product);
 	});
-
+*/
 res.render("index");
 });
 
