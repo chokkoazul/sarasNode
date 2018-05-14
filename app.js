@@ -12,7 +12,7 @@ var MONGO_URI = process.env.MONGO_URI;
 if (ENVIRONMENT === "production") {
 	mongoose.connect(MONGO_URI);
 } else {
-	mongoose.connect("mongodb://localhost/saradb");
+	mongoose.connect("mongodb://sarasuser:dantedante@ds113870.mlab.com:13870/sarasdb");
 }
 
 app.use(bodyParser.json());
@@ -76,7 +76,7 @@ app.post("/admin/edit", function(req,res){
 	{ title: req.body.nombre,
   	  description: req.body.descripccion,
   	  salePrice: req.body.precioVenta,
-  	  status: "Vendido"
+  	  status: req.body.estado
   	};
 
   	Product.update({"_id":idProd}, data, function(error, product){
