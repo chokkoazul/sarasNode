@@ -4,10 +4,10 @@ html(lang="en")
     title mi priemra pagina
     meta(charset="utf-8" name="viewport" content="width=device-width, initial-scale=1")
     script(src="https://code.jquery.com/jquery-1.11.1.min.js")
-    script(src="js/test.js")
+    script(src="../js/test.js")
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css")
-    link(rel="stylesheet" href="css/main.css")
-    link(rel="stylesheet" href="css/animate.css")
+    link(rel="stylesheet" href="../css/main.css")
+    link(rel="stylesheet" href="../css/animate.css")
     link(href="https://fonts.googleapis.com/css?family=Lato|Pacifico" rel="stylesheet")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
     
@@ -35,7 +35,6 @@ html(lang="en")
                thead
                  th &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                  th(class="text-center") Nombre
-                 th(class="text-center") Descripcción
                  th(class="text-center") Precio Compra
                  th(class="text-center") Precio Venta
                  th(class="text-center") Estado
@@ -45,9 +44,8 @@ html(lang="en")
                  each product in products
                    tr
                    td 
-                    img(src="img/chaquetaazul.jpg" class="img-rounded")
+                    img(src="../img/"+product.image class="img-rounded")
                    td #{product.title}
-                   td #{product.description}
                    td $ #{product.purchasePrice}
                    td $ #{product.salePrice}
                    td

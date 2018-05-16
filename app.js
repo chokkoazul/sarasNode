@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 //var method_override = require("method-override");
 var app = express();
+var admin = require('./routes/admin')
 
 
 
@@ -18,7 +19,7 @@ if (ENVIRONMENT === "production") {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var productShema = {
+/*var productShema = {
 	title:String,
 	description:String,
 	purchasePrice:Number,
@@ -26,7 +27,7 @@ var productShema = {
 	status:String
 };
 
-var Product = mongoose.model("Product", productShema);
+var Product = mongoose.model("Product", productShema);*/
 
 app.set("view engine","jade");
 app.use(express.static("public"));
@@ -48,11 +49,10 @@ console.log("products"+product);
 res.render("index");
 });
 
-app.get("/admin", function(req,res){
-	Product.find(function(error, document){
-		if(error){console.log(error);}
-		res.render("admin/index", {products : document});
-	});
+app.use('/admin', admin);
+
+/*app.get("/admin", function(req,res){
+	
 
 
 });
@@ -140,6 +140,6 @@ else{
 app.get("/admin", function(req,res){
 	res.render("admin/form");
 });
+*/
 
-
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 3000);
