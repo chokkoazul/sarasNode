@@ -44,8 +44,7 @@ router.post("/edit", function(req,res){
 	{ title: req.body.nombre,
   	  description: req.body.descripccion,
   	  salePrice: req.body.precioVenta,
-  	  status: req.body.estado,
-  	  image: "chaquetanegra.jpg"
+  	  status: req.body.estado
   	};
 
   	Product.update({"_id":idProd}, data, function(error, product){
@@ -86,9 +85,9 @@ console.log(form);
         var file_name = old_path.substr(index);
         var file_name_clean = path.join(file_name + '.' + file_ext);
 
-//        var new_path = path.join('/Users/cristianosorio/Documents/node/sarasNode/public/img/', file_name + '.' + file_ext);
-https://sarasapp.herokuapp.com/img/
-var new_path = path.join('https://sarasapp.herokuapp.com/img/', file_name + '.' + file_ext);
+        var new_path = path.join('public/img/', file_name + '.' + file_ext);
+//https://sarasapp.herokuapp.com/img/
+//var new_path = path.join('https://sarasapp.herokuapp.com/img/', file_name + '.' + file_ext);
 
         console.log("nuevo path");
         console.log(new_path);
