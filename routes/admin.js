@@ -42,7 +42,8 @@ var dinerorec;
 router.get('/finanzas', function(req,res) {
 
 
-    Product.aggregate(
+	//recupera el dinero gastado (precio de costo)
+	Product.aggregate(
     	[
     	{
             $group: {
@@ -55,8 +56,8 @@ router.get('/finanzas', function(req,res) {
 	    dinerogas = resultado[0].dinerogastadoag;
 	});
 
-
-    Product.aggregate(
+	// recupera el dinero recibido (precio de venta)
+	Product.aggregate(
     	[
     	{ 
     		$match: {
@@ -74,27 +75,21 @@ router.get('/finanzas', function(req,res) {
 		dinerorec = resultado[0].dinerorecibidoag;
 	});
 
-
-    Product.count(function(error, cantidad){
+	// recuperar la cantidad de productos vendidos
+	Product.count(function(error, cantidad){
 		if(error){console.log(error);}
-		console.log("cantidad"+cantidad);
 		
 		Product.count({"status":"Vendido"},function(error, cantidadvendidos){
-
-		console.log("cantidadvendidos"+cantidadvendidos);
 
 		var variable = {
 			"total":cantidad,
 			"vendidos":cantidadvendidos,
 			"dinerogastado":dinerogas,
-			"dinerorecibido":dinerorec
+			"dinerorecibido":dinerorec,
+			"ganancias":dinerogas-dinerorec
 		};
 		res.render("admin/finanzas", {modelo : variable});
-
 		});
-
-
-
 	});
 })
 
