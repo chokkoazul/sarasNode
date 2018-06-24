@@ -2,26 +2,154 @@ doctype html
 html(lang="en")
   head
     title mi priemra pagina
-    meta(charset="utf-8")
-    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet")
-    link(rel="stylesheet" href="css/main.css")
-    link(rel="stylesheet" href="css/animate.css")
+    meta(charset="utf-8" name="viewport" content="width=device-width, initial-scale=1")
+    script(src="https://code.jquery.com/jquery-1.11.1.min.js")
+    script(src="../js/test.js")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css")
+    link(rel="stylesheet" href="../css/main.css")
+    link(rel="stylesheet" href="../css/animate.css")
     link(href="https://fonts.googleapis.com/css?family=Lato|Pacifico" rel="stylesheet")
-
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
+    
   body
-    h1 Panel de productos
-      table(class="table")
-        caption Productos Actuales
-        thead
-          tr
-            th Nombre
-            th Descripción
-            th Acciones
-        tbody
-          each product in products
-            tr
-              td #{product.title}
-              td #{product.description}
-              td
-                a(href="/admin/edit/#{product._id}") Editar
-                a(href="/admin/delete/#{product._id}") Eliminar
+      nav(class="navbar navbar-default")
+        div(class="container-fluid")
+          div(class="navbar-header")
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+            a(class="navbar-brand" href="#") Saras
+          div(class="collapse navbar-collapse" id="myNavbar")          
+            ul(class="nav navbar-nav")
+              li(class="active")
+                a(href="/") Home
+              li
+                a(href="/admin/")
+                 Ver Productos
+              li
+                a(id="btnCrear" data-title="Edit" data-toggle="modal" data-target="#create" )
+                 Ingresar Producto
+              li
+                a(href="/admin/finanzas/") 
+                 Ver Finanzas
+      div(class="container text-center")
+        div(class="row")
+           div(class="col-md-12")
+           h4 Listado de productos
+           div(class="table-responsive")
+             table(id="mytable" class="table table-bordred table-striped")
+               thead
+                 th &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                 th(class="text-center") Nombre
+                 th(class="text-center") Precio Compra
+                 th(class="text-center") Precio Venta
+                 th(class="text-center") Estado
+                 th(class="text-center") 
+                 th(class="text-center") 
+               tbody
+                 each product in products
+                   tr
+                   td 
+                    img(src="../img/"+product.image class="img-rounded")
+                   td #{product.title}
+                   td $ #{product.purchasePrice}
+                   td $ #{product.salePrice}
+                   td
+                    if (product.status=='En Stock')
+                     span(class="label label-success") #{product.status}
+                    else
+                     span(class="label label-danger") #{product.status}
+                   td
+                      p(data-placement="top" data-toggle="tooltip" title="Edit")
+                       button(id="btnEditar" class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-nombre="#{product.title}" data-descripccion="#{product.description}" data-preciocompra="#{product.purchasePrice}" data-precioventa="#{product.salePrice}" data-estado="#{product.status}" data-idprod="#{product.id}")
+                        span(class="glyphicon glyphicon-pencil")
+                   td
+                      p(data-placement="top" data-toggle="tooltip" title="Delete")
+                       button(id="btnEliminar" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-idprod="#{product.id}")
+                        span(class="glyphicon glyphicon-trash")
+                 
+      div(class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
+        div(class="modal-dialog")
+         div(class="modal-content")
+          form(method="POST" action="/admin/edit" style="margin-top:1.5em;")
+           div(class="modal-header")
+            button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
+             span(class="glyphicon glyphicon-remove" aria-hidden="true")
+            h4(class="modal-title custom_align" id="Heading") Modificar Producto
+            br
+            input(id="id_prod" type="hidden" name="id_prod")
+            div(class="form-group")
+             label Nombre
+             input(id="nombre" name="nombre" type="text" class="form-control")
+            div(class="form-group")
+             label Descripcción
+             input(class="form-control" name="descripccion" id="descripccion" type="text")
+            div(class="form-group")
+             label Precio de Compra
+             input(class="form-control" name="precioCompra" id="precioCompra" type="text" disabled)
+            div(class="form-group")
+             label Precio de Venta
+             input(class="form-control" name="precioVenta" id="precioVenta" type="text")
+            div(class="form-group")
+             label Estado
+             select(class="form-control" name="estado" id="estado")
+              option(selected) En Stock
+              option Vendido
+              //if (estado=='En Stock')
+               option(selected) En Stock
+               option Vendido
+              //else
+               option En Stock
+               option(selected) Vendido
+            div(class="form-group")
+             input(type="submit" class="btn btn-primary" value="Modificar Producto" style="width: 100%;")
+ 
+      div(class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
+        div(class="modal-dialog")
+          div(class="modal-content")
+             div(class="modal-header")
+               button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
+                span(class="glyphicon glyphicon-remove" aria-hidden="true")
+               h4(class="modal-title custom_align" id="Heading") Eliminar un producto
+             div(class="modal-body")
+               div(class="alert alert-danger")
+                h4 ¿Estas seguro que quieres eliminar este producto?
+             div(class="modal-footer quitar-float")
+                a(id="aEliminar")
+                 button(type="button" class="btn btn-danger" style="width: 100%;") Si
+                button(type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100%;") No
+               
+                
+      div(class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
+        div(class="modal-dialog")
+         div(class="modal-content")
+          form(method="POST" action="/admin/create" enctype="multipart/form-data" style="margin-top:1.5em;")
+           div(class="modal-header")
+            button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
+             span(class="glyphicon glyphicon-remove" aria-hidden="true")
+            h4(class="modal-title custom_align" id="Heading") Crear Producto
+            br
+            div(class="form-group")
+             label Nombre
+             input(id="nombreins" name="nombreins" type="text" class="form-control" placeholder="nombre del producto")
+            div(class="form-group")
+             label Descripcción
+             input(class="form-control" name="descripccionins" id="descripccionins" type="text" placeholder="descripcción del producto")
+            div(class="form-group")
+             label Precio de Compra
+             input(class="form-control" name="precioComprains" id="precioComprains" type="text" placeholder="precio de compra del producto")
+            div(class="form-group")
+             label Precio de Venta
+             input(class="form-control" name="precioVentains" id="precioVentains" type="text" placeholder="precio de venta del producto")
+            div(class="form-group")
+             label Imagen
+             input(class="form-control" name="imagenins" id="imagenins" type="file" placeholder="imagen del producto")
+            div(class="form-group")
+             input(type="submit" class="btn btn-primary" value="Crear Producto" style="width: 100%;")
+
+
+
+
+
+

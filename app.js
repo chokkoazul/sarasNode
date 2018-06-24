@@ -1,7 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-//var method_override = require("method-override");
 var app = express();
 var admin = require('./routes/admin')
 
@@ -18,128 +17,13 @@ if (ENVIRONMENT === "production") {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-/*var productShema = {
-	title:String,
-	description:String,
-	purchasePrice:Number,
-    salePrice:Number,
-	status:String
-};
-
-var Product = mongoose.model("Product", productShema);*/
-
 app.set("view engine","jade");
 app.use(express.static("public"));
 app.get("/", function(req,res){
-	/*var data = {
-		title: "pantalon",
-		description: "muy lindo",
-		purchasePrice: 10000,
-	    salePrice: 10123,
-		status: "Vendido"
-	}
 
-	var product = new Product(data);
-
-	product.save(function(err){
-console.log("products"+product);
-	});
-*/
 res.render("index");
 });
 
 app.use('/admin', admin);
-
-/*app.get("/admin", function(req,res){
-	
-
-
-});
-
-app.get("/admin2", function(req,res){
-	Product.find(function(error, document){
-		if(error){console.log(error);}
-		res.render("admin/index2", {products : document});
-	});
-
-
-});
-
-
-app.post("/admin/edit", function(req,res){
-    console.log("editar");
-    console.log(req.body)
-    var idProd = req.body.id_prod;
-    console.log(idProd);
-    var data = 
-	{ title: req.body.nombre,
-  	  description: req.body.descripccion,
-  	  salePrice: req.body.precioVenta,
-  	  status: req.body.estado
-  	};
-
-  	Product.update({"_id":idProd}, data, function(error, product){
-  		if(error){console.log(error);}
-		res.redirect("/admin2");
-  	});
-});
-
-app.post("/admin/create", function(req,res){
-    console.log("create");
-//    console.log(req.body)
-  
-    var data = {
-		title: req.body.nombreins,
-		description: req.body.descripccionins,
-		purchasePrice: req.body.precioComprains,
-	    salePrice: req.body.precioVentains,
-		status: "En Stock"
-	}
-
-	var product = new Product(data);
-
-	product.save(function(err){
-		if(err){console.log(err);}
-		res.redirect("/admin2");
-	});
-
-});
-
-
-app.get("/admin/edit/:id", function(req,res){
-var id_producto = req.params.id;
-	Product.findOne({"_id":id_producto}, function(error,producto){
-		res.render("admin/edit", {product : producto});
-	});
-});
-
-app.get("/admin/delete/:id", function(req,res){
-var id_producto = req.params.id;
-	console.log(id_producto);
-    
-	Product.remove({"_id":id_producto}, function(error){
-  		if(error){console.log(error);}
-		res.redirect("/admin2");
-	});
-});
-
-app.post("/admin", function(req,res){
-if(req.body.password=="123"){
-	Product.find(function(error, document){
-		if(error){console.log(error);}
-		res.render("menu/index", {products : document});
-	});
-}
-else{
-	res.redirect("/");
-}
-});
-
-
-app.get("/admin", function(req,res){
-	res.render("admin/form");
-});
-*/
 
 app.listen(process.env.PORT || 3000);

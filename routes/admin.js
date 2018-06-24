@@ -28,13 +28,77 @@ var productShema = {
 
 var Product = mongoose.model("Product", productShema);
 
+// index admin
 router.get('/', function(req,res) {
 	Product.find(function(error, document){
 		if(error){console.log(error);}
-		res.render("admin/index2", {products : document});
+		res.render("admin/index", {products : document});
 	});
 })
 
+var dinerogas;
+var dinerorec;
+// index finanzas
+router.get('/finanzas', function(req,res) {
+
+
+    Product.aggregate(
+    	[
+    	{
+            $group: {
+                _id: null,
+                dinerogastadoag: {$sum: "$purchasePrice"}
+            }
+        }
+        ],function(error,resultado){
+        if(error){console.log(error);}
+	    dinerogas = resultado[0].dinerogastadoag;
+	});
+
+
+    Product.aggregate(
+    	[
+    	{ 
+    		$match: {
+        		status: "Vendido"
+    		}
+    	},
+    	{
+            $group: {
+                _id: null,
+                dinerorecibidoag: {$sum: "$salePrice"}
+            }
+        }
+        ],function(error,resultado){
+        if(error){console.log(error);}
+		dinerorec = resultado[0].dinerorecibidoag;
+	});
+
+
+    Product.count(function(error, cantidad){
+		if(error){console.log(error);}
+		console.log("cantidad"+cantidad);
+		
+		Product.count({"status":"Vendido"},function(error, cantidadvendidos){
+
+		console.log("cantidadvendidos"+cantidadvendidos);
+
+		var variable = {
+			"total":cantidad,
+			"vendidos":cantidadvendidos,
+			"dinerogastado":dinerogas,
+			"dinerorecibido":dinerorec
+		};
+		res.render("admin/finanzas", {modelo : variable});
+
+		});
+
+
+
+	});
+})
+
+// editar producto
 router.post("/edit", function(req,res){
     console.log("editar");
     console.log(req.body)
@@ -53,6 +117,7 @@ router.post("/edit", function(req,res){
   	});
 });
 
+// eliminar producto
 router.get("/delete/:id", function(req,res){
 var id_producto = req.params.id;
 	console.log(id_producto);
@@ -63,14 +128,12 @@ var id_producto = req.params.id;
 	});
 });
 
+// crear producto
 router.post("/create", function(req,res){
     console.log("create");
     console.log(req.body);
-
-
-
-var form = new formidable.IncomingForm();
-console.log(form);
+	var form = new formidable.IncomingForm();
+	console.log(form);
     form.parse(req, function(err, fields, files) {
         // `file` is the name of the <input> field of type `file`
         console.log(files);
@@ -86,9 +149,6 @@ console.log(form);
         var file_name_clean = path.join(file_name + '.' + file_ext);
 
         var new_path = path.join('public/img/', file_name + '.' + file_ext);
-//https://sarasapp.herokuapp.com/img/
-//var new_path = path.join('https://sarasapp.herokuapp.com/img/', file_name + '.' + file_ext);
-
         console.log("nuevo path");
         console.log(new_path);
 
@@ -126,12 +186,10 @@ console.log(form);
             });
         });
     });
-
-  
-    
 });
 
 
+// crear producto automatico
 router.get('/crearproductoauto', function(req,res) {
 	var data = {
 		title: "pantalon",
