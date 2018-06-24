@@ -4,7 +4,9 @@ html(lang="en")
     finanzas
     meta(charset="utf-8" name="viewport" content="width=device-width, initial-scale=1")
     script(src="https://code.jquery.com/jquery-1.11.1.min.js")
-    script(src="../js/test.js")
+    script(src="../../js/amcharts/amcharts.js")
+    script(src="../../js/amcharts/serial.js")
+    script(src="../../js/test.js")
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css")
     link(rel="stylesheet" href="../css/main.css")
     link(rel="stylesheet" href="../css/animate.css")
@@ -33,90 +35,8 @@ html(lang="en")
                 a(href="/admin/finanzas/") 
                   Ver Finanzas
       div(class="container")
-        div(class="row")
-           div(class="col-md-12")
-           h4(class="text-center") Finanzas
-           div(class="table-responsive")
-             table(id="mytable" class="table table-bordred table-striped")
-               tbody
-                   tr
-                   td Total de productos
-                   td #{modelo.total}
-           div(class="table-responsive")
-             table(id="mytable" class="table table-bordred table-striped")
-               tbody
-                   tr
-                   td Total Vendidos
-                   td #{modelo.vendidos}
-           div(class="table-responsive")
-             table(id="mytable" class="table table-bordred table-striped")
-               tbody
-                   tr
-                   td Dinero Gastado
-                   td #{modelo.dinerogastado}
-           div(class="table-responsive")
-             table(id="mytable" class="table table-bordred table-striped")
-               tbody
-                   tr
-                   td Dinero Recibido
-                   td #{modelo.dinerorecibido}
-           div(class="table-responsive")
-             table(id="mytable" class="table table-bordred table-striped")
-               tbody
-                   tr
-                   td Ganancia
-                   td #{modelo.ganancias}
-      div(class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
-        div(class="modal-dialog")
-         div(class="modal-content")
-          form(method="POST" action="/admin/edit" style="margin-top:1.5em;")
-           div(class="modal-header")
-            button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
-             span(class="glyphicon glyphicon-remove" aria-hidden="true")
-            h4(class="modal-title custom_align" id="Heading") Modificar Producto
-            br
-            input(id="id_prod" type="hidden" name="id_prod")
-            div(class="form-group")
-             label Nombre
-             input(id="nombre" name="nombre" type="text" class="form-control")
-            div(class="form-group")
-             label Descripcción
-             input(class="form-control" name="descripccion" id="descripccion" type="text")
-            div(class="form-group")
-             label Precio de Compra
-             input(class="form-control" name="precioCompra" id="precioCompra" type="text" disabled)
-            div(class="form-group")
-             label Precio de Venta
-             input(class="form-control" name="precioVenta" id="precioVenta" type="text")
-            div(class="form-group")
-             label Estado
-             select(class="form-control" name="estado" id="estado")
-              option(selected) En Stock
-              option Vendido
-              //if (estado=='En Stock')
-               option(selected) En Stock
-               option Vendido
-              //else
-               option En Stock
-               option(selected) Vendido
-            div(class="form-group")
-             input(type="submit" class="btn btn-primary" value="Modificar Producto" style="width: 100%;")
- 
-      div(class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
-        div(class="modal-dialog")
-          div(class="modal-content")
-             div(class="modal-header")
-               button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
-                span(class="glyphicon glyphicon-remove" aria-hidden="true")
-               h4(class="modal-title custom_align" id="Heading") Eliminar un producto
-             div(class="modal-body")
-               div(class="alert alert-danger")
-                h4 ¿Estas seguro que quieres eliminar este producto?
-             div(class="modal-footer quitar-float")
-                a(id="aEliminar")
-                 button(type="button" class="btn btn-danger" style="width: 100%;") Si
-                button(type="button" class="btn btn-primary" data-dismiss="modal" style="width: 100%;") No
-               
+        
+      
                 
       div(class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
         div(class="modal-dialog")
@@ -145,7 +65,12 @@ html(lang="en")
             div(class="form-group")
              input(type="submit" class="btn btn-primary" value="Crear Producto" style="width: 100%;")
 
+       div(id="chartdiv" style="width: 100%; height: 400px;")
 
+       input(id="gastado" type="hidden" value="#{modelo.dinerogastado}")
+       input(id="recibido" type="hidden" value="#{modelo.dinerorecibido}")
+       input(id="completo" type="hidden" value="#{modelo}")
+    
 
 
 

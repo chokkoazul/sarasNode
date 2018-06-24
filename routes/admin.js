@@ -82,11 +82,11 @@ router.get('/finanzas', function(req,res) {
 		Product.count({"status":"Vendido"},function(error, cantidadvendidos){
 
 		var variable = {
-			"total":cantidad,
-			"vendidos":cantidadvendidos,
+			//"total":cantidad,
+			//"vendidos":cantidadvendidos,
 			"dinerogastado":dinerogas,
-			"dinerorecibido":dinerorec,
-			"ganancias":dinerogas-dinerorec
+			"dinerorecibido":dinerorec
+			//"ganancias":dinerogas-dinerorec
 		};
 		res.render("admin/finanzas", {modelo : variable});
 		});
