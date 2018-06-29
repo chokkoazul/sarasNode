@@ -23,7 +23,8 @@ var productShema = {
 	purchasePrice:Number,
     salePrice:Number,
 	status:String,
-	image:String
+	image:String,
+	category:String
 };
 
 var Product = mongoose.model("Product", productShema);
@@ -101,7 +102,8 @@ router.post("/edit", function(req,res){
     console.log(idProd);
     var data = 
 	{ title: req.body.nombre,
-  	  description: req.body.descripccion,
+	  description: req.body.descripccion,
+	  category: req.body.category,
   	  salePrice: req.body.precioVenta,
   	  status: req.body.estado
   	};
@@ -161,6 +163,7 @@ router.post("/create", function(req,res){
 						var data = {
 							title: fields.nombreins,
 							description: fields.descripccionins,
+							category: fields.categoryins,
 							purchasePrice: fields.precioComprains,
 	    					salePrice: fields.precioVentains,
 							status: "En Stock",

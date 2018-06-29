@@ -13,12 +13,14 @@ $(document).ready(function() {
         var idprod = $(this).data('idprod');
      	var nombre = $(this).data('nombre');
      	var descripccion = $(this).data('descripccion');
+     	var category = $(this).data('category');
      	var precioCompra = $(this).data('preciocompra');
      	var precioVenta = $(this).data('precioventa');
      	var estado = $(this).data('estado');
      	$(".modal-content #id_prod").attr("value",idprod);
      	$(".modal-content #nombre").attr("value",nombre);
      	$(".modal-content #descripccion").attr("value",descripccion);
+     	$(".modal-content #category").attr("value",category);
      	$(".modal-content #precioCompra").attr("value",precioCompra);
      	$(".modal-content #precioVenta").attr("value",precioVenta);
      	$(".modal-content #estado").attr("value",estado);
