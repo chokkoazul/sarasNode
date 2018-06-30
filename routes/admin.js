@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var formidable = require('formidable');
 var fs = require('fs');
 var path = require('path');
+var Product = require('../models/product');
+var productDao = require('../dao/productDAO');
 
 var ENVIRONMENT = process.env.ENVIRONMENT;
 var MONGO_URI = process.env.MONGO_URI;
@@ -16,19 +18,6 @@ if (ENVIRONMENT === "production") {
 	mongoose.connect("mongodb://sarasuser:dantedante@ds113870.mlab.com:13870/sarasdb");
 }
 
-
-var productShema = {
-	title:String,
-	description:String,
-	purchasePrice:Number,
-    salePrice:Number,
-	status:String,
-	image:String,
-	category:String
-};
-
-var Product = mongoose.model("Product", productShema);
-
 // index admin
 router.get('/', function(req,res) {
 	Product.find(function(error, document){
@@ -37,45 +26,31 @@ router.get('/', function(req,res) {
 	});
 })
 
-var dinerogas;
-var dinerorec;
 // index finanzas
 router.get('/finanzas', function(req,res) {
 
+	var dinerogas;
+	var dinerorec;
 
-	//recupera el dinero gastado (precio de costo)
-	Product.aggregate(
-    	[
-    	{
-            $group: {
-                _id: null,
-                dinerogastadoag: {$sum: "$purchasePrice"}
-            }
-        }
-        ],function(error,resultado){
-        if(error){console.log(error);}
-	    dinerogas = resultado[0].dinerogastadoag;
+	productDao.dineroGastado(function(response){
+		dinerogas = response;
 	});
 
-	// recupera el dinero recibido (precio de venta)
-	Product.aggregate(
-    	[
-    	{ 
-    		$match: {
-        		status: "Vendido"
-    		}
-    	},
-    	{
-            $group: {
-                _id: null,
-                dinerorecibidoag: {$sum: "$salePrice"}
-            }
-        }
-        ],function(error,resultado){
-        if(error){console.log(error);}
-		dinerorec = resultado[0].dinerorecibidoag;
+	productDao.dineroRecibido(function(response){
+		dinerorec = response;
 	});
 
+console.log("dinerogas..."+dinerogas);
+
+	var variable = {
+		//"total":cantidad,
+		//"vendidos":cantidadvendidos,
+		"dinerogastado":111,
+		"dinerorecibido":222
+		//"ganancias":dinerogas-dinerorec
+	};
+	//res.render("admin/finanzas", {modelo : variable});
+	
 	// recuperar la cantidad de productos vendidos
 	Product.count(function(error, cantidad){
 		if(error){console.log(error);}
