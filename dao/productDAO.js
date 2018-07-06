@@ -10,9 +10,9 @@ if (ENVIRONMENT === "production") {
 	mongoose.connect("mongodb://sarasuser:dantedante@ds113870.mlab.com:13870/sarasdb");
 }
 
-var dineroGastado = function(callback){
+var dineroRecibido = function(callback){
 
-    var dine;
+    var dineGas;
     //recupera el dinero gastado (precio de costo)
     Product.aggregate(
         [
@@ -24,14 +24,11 @@ var dineroGastado = function(callback){
         }
         ],function(error,resultado){
             if(error){console.log(error);}
-            dine = resultado[0].dinerogastadoag;
-            return callback(dine);
+            dineGas = resultado[0].dinerogastadoag;
+            //return callback(dineGas);
         });
-};
 
-var dineroRecibido = function(callback){
-
-    var dine;
+    var dineRec;
     // recupera el dinero recibido (precio de venta)
     Product.aggregate(
         [
@@ -48,11 +45,10 @@ var dineroRecibido = function(callback){
         }
         ],function(error,resultado){
             if(error){console.log(error);}
-            dine = resultado[0].dinerorecibidoag;
-            return callback(dine);
+            dineRec = resultado[0].dinerorecibidoag;
+            return callback(dineGas,dineRec);
         });
 };
 
 	
-module.exports.dineroGastado = dineroGastado;
 module.exports.dineroRecibido = dineroRecibido;

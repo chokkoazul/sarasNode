@@ -32,40 +32,22 @@ router.get('/finanzas', function(req,res) {
 	var dinerogas;
 	var dinerorec;
 
-	productDao.dineroGastado(function(response){
-		dinerogas = response;
-	});
+	//productDao.dineroGastado(function(response){
+	//	dinerogas = response;
+	//});
 
-	productDao.dineroRecibido(function(response){
-		dinerorec = response;
-	});
-
-console.log("dinerogas..."+dinerogas);
-
-	var variable = {
-		//"total":cantidad,
-		//"vendidos":cantidadvendidos,
-		"dinerogastado":111,
-		"dinerorecibido":222
-		//"ganancias":dinerogas-dinerorec
-	};
-	//res.render("admin/finanzas", {modelo : variable});
-	
-	// recuperar la cantidad de productos vendidos
-	Product.count(function(error, cantidad){
-		if(error){console.log(error);}
-		
-		Product.count({"status":"Vendido"},function(error, cantidadvendidos){
+	productDao.dineroRecibido(function(dineroGas,dineroReci){
+		//dinerorec = response;
 
 		var variable = {
 			//"total":cantidad,
 			//"vendidos":cantidadvendidos,
-			"dinerogastado":dinerogas,
-			"dinerorecibido":dinerorec
+			"dinerogastado":dineroGas,
+			"dinerorecibido":dineroReci
 			//"ganancias":dinerogas-dinerorec
 		};
 		res.render("admin/finanzas", {modelo : variable});
-		});
+
 	});
 })
 
