@@ -10,7 +10,7 @@ if (ENVIRONMENT === "production") {
 	mongoose.connect("mongodb://sarasuser:dantedante@ds113870.mlab.com:13870/sarasdb");
 }
 
-let getDineroFinanza = function(callback){
+let getDineroFinanza = (callback) => {
 
     let dineroGastado;
     let dineroRecibido;
@@ -23,7 +23,7 @@ let getDineroFinanza = function(callback){
                 dinerogastadoag: {$sum: "$purchasePrice"}
             }
         }
-        ],function(error,resultado){
+        ],(error,resultado) => {
             if(error){console.log(error);}
             dineroGastado = resultado[0].dinerogastadoag;
         });
@@ -42,14 +42,14 @@ let getDineroFinanza = function(callback){
                 dinerorecibidoag: {$sum: "$salePrice"}
             }
         }
-        ],function(error,resultado){
+        ],(error,resultado) => {
             if(error){console.log(error);}
             dineroRecibido = resultado[0].dinerorecibidoag;
             return callback(dineroGastado,dineroRecibido);
         });
 };
 
-let getProductos = function (callback){
+let getProductos = (callback) => {
 	
 	Product.find((error, document) => {
 		if (error) { console.log(error); }
