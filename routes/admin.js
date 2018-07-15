@@ -20,19 +20,23 @@ if (ENVIRONMENT === "production") {
 
 // index admin
 router.get('/', (req, res) => {
-	productDao.getProductos((productos) => {
+	productDao.getProductos()
+	.then(productos => {
 		res.render("admin/index", { products: productos });
+	})
+	.catch( err => {
+		console.log(err);
 	});
-})
+});
 
 // index finanzas
 router.get('/finanzas', (req, res) => {
-	productDao.getDineroFinanza((dineroGastado, dineroRecibido) => {
-		let variable = {
-			"dinerogastado": dineroGastado,
-			"dinerorecibido": dineroRecibido
-		};
-		res.render("admin/finanzas", { modelo: variable });
+	productDao.getDineroFinanza()
+	.then(finanza => {
+		res.render("admin/finanzas", { modelo: finanza });
+	})
+	.catch( err => {
+		console.log(err);
 	});
 })
 
