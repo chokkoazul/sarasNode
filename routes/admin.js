@@ -61,11 +61,14 @@ router.post("/edit", (req, res) => {
 // eliminar producto
 router.get("/delete/:id", function (req, res) {
 	var id_producto = req.params.id;
-	console.log(id_producto);
+	console.log("id producto:"+id_producto);
 
-	Product.remove({ "_id": id_producto }, function (error) {
-		if (error) { console.log(error); }
+	productDao.deleteProduct(id_producto)
+	.then(response => {
 		res.redirect("/admin");
+	})
+	.catch( err => {
+		console.log(err);
 	});
 });
 
