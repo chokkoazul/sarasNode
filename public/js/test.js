@@ -10,9 +10,9 @@ $(document).ready(function() {
 	$(".btn").on('click', function(){
 
     if($(this).attr('id')=='btnEditar'){
-        var idprod = $(this).data('idprod');
+		var idprod = $(this).data('idprod');
      	var nombre = $(this).data('nombre');
-     	var descripccion = $(this).data('descripccion');
+		var descripccion = $(this).data('descripccion');
      	var category = $(this).data('category');
      	var precioCompra = $(this).data('preciocompra');
      	var precioVenta = $(this).data('precioventa');
@@ -26,8 +26,8 @@ $(document).ready(function() {
      	$(".modal-content #estado").attr("value",estado);
     }
     else if($(this).attr('id')=='btnEliminar'){
-        var idprod2 = $(this).data('idprod');
-        $(".modal-content #aEliminar").attr("href","/admin/delete/"+idprod2);
+		var idprod2 = $(this).data('idprod');
+		$(".modal-content #aEliminar").attr("href","/admin/delete/"+idprod2);
     }
    
 	});
