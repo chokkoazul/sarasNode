@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Product = require('../models/product');
+var axios = require('axios');
+var apiUrl = "https://sarasrest.herokuapp.com/sarasapi/products";
 
 var ENVIRONMENT = process.env.ENVIRONMENT;
 var MONGO_URI = process.env.MONGO_URI;
@@ -63,15 +65,14 @@ let getDineroFinanza = () => {
     });
 }
 
-let getProductos = () => {
-   return new Promise((resolve, reject) => {
-        Product.find((error, document) => {
-            if (error) { 
-                reject(error); 
-            }
-            else{
-                resolve(document);
-            }
+let getProductos = () =>  {
+    return new Promise((resolve, reject) => {
+        axios.get(apiUrl)
+        .then(function (response) {
+            resolve(response.data);
+        })
+        .catch(function (error) {
+            reject(error);
         });
     });
 }

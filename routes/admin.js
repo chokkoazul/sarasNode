@@ -62,7 +62,6 @@ router.post("/edit", (req, res) => {
 router.get("/delete/:id", function (req, res) {
 	var id_producto = req.params.id;
 	console.log("id producto:"+id_producto);
-
 	productDao.deleteProduct(id_producto)
 	.then(response => {
 		res.redirect("/admin");
