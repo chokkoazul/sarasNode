@@ -80,14 +80,12 @@ let getProductos = () =>  {
 let deleteProduct = (idProd) => {
     return new Promise((resolve, reject) => {
         console.log("...............id de producto desde dao..."+idProd);
-        let id_producto = idProd;
-        Product.remove({ "_id": id_producto }, function (error) {
-            if (error) { 
-                reject(error);
-            }
-            else{
-                resolve(`Producto con id ${idProd} ha sido eliminado`);    
-            }
+        axios.delete(apiUrl.concat("/").concat(idProd))
+        .then(function (response) {
+            resolve(`Producto con id ${idProd} ha sido eliminado`);
+        })
+        .catch(function (error) {
+            reject(error);
         });
     });
 }
