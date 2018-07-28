@@ -54,18 +54,13 @@ router.post("/edit", (req, res) => {
 	};
 
 	productDao.updateProduct(data)
-	.then(message => {
-		console.log("mensaje desde servicio..."+message.message)
+	.then(response => {
+		console.log("mensaje desde servicio..."+response.message)
 		res.redirect("/admin");
 	})
 	.catch( err => {
 		console.log(err);
 	});
-
-	/*Product.update({ "_id": idProd }, data, function (error, product) {
-		if (error) { console.log(error); }
-		res.redirect("/admin");
-	});*/
 });
 
 // eliminar producto
