@@ -45,6 +45,7 @@ router.post("/edit", (req, res) => {
 	let idProd = req.body.id_prod;
 	let data =
 	{
+		_id:idProd,
 		title: req.body.nombre,
 		description: req.body.descripccion,
 		category: req.body.category,
@@ -52,10 +53,19 @@ router.post("/edit", (req, res) => {
 		status: req.body.estado
 	};
 
-	Product.update({ "_id": idProd }, data, function (error, product) {
+	productDao.updateProduct(data)
+	.then(message => {
+		console.log("mensaje desde servicio..."+message.message)
+		res.redirect("/admin");
+	})
+	.catch( err => {
+		console.log(err);
+	});
+
+	/*Product.update({ "_id": idProd }, data, function (error, product) {
 		if (error) { console.log(error); }
 		res.redirect("/admin");
-	});
+	});*/
 });
 
 // eliminar producto

@@ -65,31 +65,45 @@ let getDineroFinanza = () => {
     });
 }
 
-let getProductos = () =>  {
+let getProductos = () => {
     return new Promise((resolve, reject) => {
         axios.get(apiUrl)
-        .then(function (response) {
-            resolve(response.data);
-        })
-        .catch(function (error) {
-            reject(error);
-        });
+            .then(function (response) {
+                resolve(response.data);
+            })
+            .catch(function (error) {
+                reject(error);
+            });
     });
 }
 
 let deleteProduct = (idProd) => {
     return new Promise((resolve, reject) => {
-        console.log("...............id de producto desde dao..."+idProd);
+        console.log("...............id de producto desde dao..." + idProd);
         axios.delete(apiUrl.concat("/").concat(idProd))
-        .then(function (response) {
-            resolve(`Producto con id ${idProd} ha sido eliminado`);
-        })
-        .catch(function (error) {
-            reject(error);
-        });
+            .then(function (response) {
+                resolve(`Producto con id ${idProd} ha sido eliminado`);
+            })
+            .catch(function (error) {
+                reject(error);
+            });
     });
 }
 
+let updateProduct = (product) => {
+    return new Promise((resolve, reject) => {
+        axios.put(apiUrl, product)
+            .then(function (response) {
+                resolve(response.data);
+            })
+            .catch(function (error) {
+                reject(error);
+            });
+
+    });
+}
+
+module.exports.updateProduct = updateProduct;
 module.exports.deleteProduct = deleteProduct;
 module.exports.getDineroFinanza = getDineroFinanza;
 module.exports.getProductos = getProductos;
