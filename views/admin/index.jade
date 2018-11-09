@@ -49,8 +49,6 @@ html(lang="en")
                tbody
                  each product in products
                    tr
-                   td 
-                    img(src="../img/"+product.image class="img-rounded")
                    td #{product.title}
                    td #{product.category}
                    td $ #{product.purchasePrice}
