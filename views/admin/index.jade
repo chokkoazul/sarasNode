@@ -38,34 +38,57 @@ html(lang="en")
            div(class="table-responsive")
              table(id="mytable" class="table table-bordred table-striped")
                thead
-                 th(class="text-center") Nombre
-                 th(class="text-center") Categoria
-                 th(class="text-center") Precio Compra
-                 th(class="text-center") Precio Venta
+                 th(class="text-center") Producto
+                 th(class="text-center") Venta
                  th(class="text-center") Estado
                  th(class="text-center") 
                  th(class="text-center") 
                tbody
                  each product in products
                    tr
-                   td #{product.title}
-                   td #{product.category}
-                   td $ #{product.purchasePrice}
-                   td $ #{product.salePrice}
+                   td #{product.producto}
+                   td $ #{product.venta}
                    td
-                    if (product.status=='En Stock')
-                     span(class="label label-success") #{product.status}
+                    if (product.estado=='En Stock')
+                     span(class="label label-danger") #{product.estado}
                     else
-                     span(class="label label-danger") #{product.status}
-                   td
-                      p(data-placement="top" data-toggle="tooltip" title="Edit")
-                       button(id="btnEditar" class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-nombre="#{product.title}" data-descripccion="#{product.description}" data-category="#{product.category}" data-preciocompra="#{product.purchasePrice}" data-precioventa="#{product.salePrice}" data-estado="#{product.status}" data-idprod="#{product._id}")
-                        span(class="glyphicon glyphicon-pencil")
+                     span(class="label label-success") #{product.estado}
                    td
                       p(data-placement="top" data-toggle="tooltip" title="Delete")
-                       button(id="btnEliminar" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-idprod="#{product._id}")
-                        span(class="glyphicon glyphicon-trash")
-                 
+                       button(id="btnVer" class="btn btn-primary btn-xs" data-title="Delete" data-toggle="modal" data-target="#view" data-numeropedido="#{product.numeropedido}" data-producto="#{product.producto}" data-color="#{product.color}" data-talla="#{product.talla}" data-costo="#{product.costo}" data-venta="#{product.venta}" data-estado="#{product.estado}")
+                        span(class="glyphicon glyphicon-zoom-in")
+                   td
+                      p(data-placement="top" data-toggle="tooltip" title="Edit")
+                       button(id="btnEditar" class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-numeropedido="#{product.numeropedido}" data-producto="#{product.producto}" data-color="#{product.color}" data-talla="#{product.talla}" data-costo="#{product.costo}" data-venta="#{product.venta}" data-estado="#{product.estado}" data-idprod="#{product._id}")
+                        span(class="glyphicon glyphicon-pencil")
+                   
+      div(class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="view" aria-hidden="true")
+        div(class="modal-dialog")
+         div(class="modal-content")
+          form(method="POST" action="/admin/edit" style="margin-top:1.5em;")
+           div(class="modal-header")
+            button(type="button" class="close" data-dismiss="modal" aria-hidden="true")
+             span(class="glyphicon glyphicon-remove" aria-hidden="true")
+            br
+            div(class="form-group")
+             label Numero Pedido
+             input(class="form-control" name="numeropedido" id="numeropedido" type="text" disabled)
+            div(class="form-group")
+             label Producto
+             input(class="form-control" name="producto" id="producto" type="text" disabled)
+            div(class="form-group")
+             label Color
+             input(class="form-control" name="color" id="color" type="text" disabled)
+            div(class="form-group")
+             label Talla
+             input(class="form-control" name="talla" id="talla" type="text" disabled)
+            div(class="form-group")
+             label Costo
+             input(class="form-control" name="costo" id="costo" type="text" disabled)
+            div(class="form-group")
+             label Venta
+             input(class="form-control" name="venta" id="venta" type="text" disabled)
+            
       div(class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true")
         div(class="modal-dialog")
          div(class="modal-content")
@@ -76,21 +99,25 @@ html(lang="en")
             h4(class="modal-title custom_align" id="Heading") Modificar Producto
             br
             input(id="id_prod" type="hidden" name="id_prod")
+            
             div(class="form-group")
-             label Nombre
-             input(id="nombre" name="nombre" type="text" class="form-control")
+             label Numero Pedido
+             input(class="form-control" name="numeropedido" id="numeropedido" type="text")
             div(class="form-group")
-             label Descripcción
-             input(class="form-control" name="descripccion" id="descripccion" type="text")
+             label Producto
+             input(class="form-control" name="producto" id="producto" type="text")
             div(class="form-group")
-             label Categoria
-             input(class="form-control" name="category" id="category" type="text")
+             label Color
+             input(class="form-control" name="color" id="color" type="text")
             div(class="form-group")
-             label Precio de Compra
-             input(class="form-control" name="precioCompra" id="precioCompra" type="text" disabled)
+             label Talla
+             input(class="form-control" name="talla" id="talla" type="text")
             div(class="form-group")
-             label Precio de Venta
-             input(class="form-control" name="precioVenta" id="precioVenta" type="text")
+             label Costo $
+             input(class="form-control" name="costo" id="costo" type="text")
+            div(class="form-group")
+             label Venta $
+             input(class="form-control" name="venta" id="venta" type="text")
             div(class="form-group")
              label Estado
              select(class="form-control" name="estado" id="estado")
