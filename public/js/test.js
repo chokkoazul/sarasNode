@@ -11,25 +11,54 @@ $(document).ready(function() {
 
     if($(this).attr('id')=='btnEditar'){
 		var idprod = $(this).data('idprod');
-     	var nombre = $(this).data('nombre');
-		var descripccion = $(this).data('descripccion');
-     	var category = $(this).data('category');
-     	var precioCompra = $(this).data('preciocompra');
-     	var precioVenta = $(this).data('precioventa');
-     	var estado = $(this).data('estado');
-     	$(".modal-content #id_prod").attr("value",idprod);
-     	$(".modal-content #nombre").attr("value",nombre);
-     	$(".modal-content #descripccion").attr("value",descripccion);
-     	$(".modal-content #category").attr("value",category);
-     	$(".modal-content #precioCompra").attr("value",precioCompra);
-     	$(".modal-content #precioVenta").attr("value",precioVenta);
-     	$(".modal-content #estado").attr("value",estado);
+		var numeropedido = $(this).data('numeropedido');
+		var producto = $(this).data('producto');
+		var color = $(this).data('color');
+		var talla = $(this).data('talla');
+		var costo = $(this).data('costo');
+		var venta = $(this).data('venta');
+		var estado = $(this).data('estado');
+		
+		$(".modal-content #id_prod").attr("value",idprod);
+		$(".modal-content #numeropedido").attr("value",numeropedido);
+		$(".modal-content #producto").attr("value",producto);
+		if (color !== "undefined"){
+			$(".modal-content #color").attr("value",color);
+		}
+		if (talla !== "undefined"){
+			$(".modal-content #talla").attr("value",talla);
+		}
+		$(".modal-content #costo").attr("value",costo);
+		$(".modal-content #venta").attr("value",venta);
+		
+		$(".modal-content #estado").attr("value",estado);
     }
-    else if($(this).attr('id')=='btnEliminar'){
+    else if($(this).attr('id')=='btnVer'){
+		var numeropedido = $(this).data('numeropedido');
+		var producto = $(this).data('producto');
+		var color = $(this).data('color');
+		var talla = $(this).data('talla');
+		var costo = $(this).data('costo');
+		var venta = $(this).data('venta');
+		
+		$(".modal-content #numeropedido").attr("value",numeropedido);
+		$(".modal-content #producto").attr("value",producto);
+		if (color !== "undefined"){
+			$(".modal-content #color").attr("value",color);
+		}
+		if (talla !== "undefined"){
+			$(".modal-content #talla").attr("value",talla);
+		}
+		$(".modal-content #costo").attr("value","$ "+costo);
+		$(".modal-content #venta").attr("value","$ "+venta);
+		
+
+		
+    }
+	else if($(this).attr('id')=='btnEliminar'){
 		var idprod2 = $(this).data('idprod');
-		$(".modal-content #aEliminar").attr("href","/admin/delete/"+idprod2);
+	 	$(".modal-content #aEliminar").attr("href","/admin/delete/"+idprod2);
     }
-   
 	});
 	
 	var chart;

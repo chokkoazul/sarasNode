@@ -46,11 +46,13 @@ router.post("/edit", (req, res) => {
 	let data =
 	{
 		_id:idProd,
-		title: req.body.nombre,
-		description: req.body.descripccion,
-		category: req.body.category,
-		salePrice: req.body.precioVenta,
-		status: req.body.estado
+		numeropedido: req.body.numeropedido,
+		producto: req.body.producto,
+		color: req.body.color,
+		talla: req.body.talla,
+		costo: req.body.costo,
+		venta: req.body.venta,
+		estado: req.body.estado
 	};
 
 	productDao.updateProduct(data)
